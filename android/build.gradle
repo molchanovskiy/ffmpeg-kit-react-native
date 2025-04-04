@@ -56,6 +56,9 @@ android {
 repositories {
   mavenCentral()
   google()
+   maven {
+          url = project(':app').file('repo')
+    }
 
   def found = false
   def defaultDir = null
@@ -125,5 +128,10 @@ repositories {
 
 dependencies {
   api 'com.facebook.react:react-native:+'
-  implementation 'com.arthenica:ffmpeg-kit-' + safePackageName(safeExtGet('ffmpegKitPackage', 'https')) + ':' + safePackageVersion(safeExtGet('ffmpegKitPackage', 'https'))
+  // implementation 'com.arthenica:ffmpeg-kit-' + safePackageName(safeExtGet('ffmpegKitPackage', 'https')) + ':' + safePackageVersion(safeExtGet('ffmpegKitPackage', 'https'))
+     // disable default dependency from the main repo
+    configurations.implementation {
+        exclude group: "com.arthenica", module: "ffmpeg-kit-https"
+    }
+    implementation "com.local.ffmpeg-kit:full_binary:6.0-2"
 }

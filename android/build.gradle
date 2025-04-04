@@ -53,6 +53,14 @@ android {
   }
 }
 
+allprojects {
+    repositories {
+        maven {
+          url = project(':app').file('repo')
+        }
+    }
+}
+
 repositories {
   mavenCentral()
   google()
